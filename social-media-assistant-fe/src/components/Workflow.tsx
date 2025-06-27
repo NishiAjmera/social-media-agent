@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import StepCard from './StepCard';
 import AgentLogs from './AgentLogs';
+import { Button } from './ui/button';
 
 const mockSteps = [
   {
@@ -49,6 +50,8 @@ export default function Workflow({ showLogs }: { showLogs: boolean }) {
   const [expanded, setExpanded] = useState<number | null>(3); // Last step open by default
   const [steps, setSteps] = useState(mockSteps);
   const [logs] = useState(mockLogs);
+  const [userInputLoading, setUserInputLoading] = useState(false);
+  const [userInputResponse, setUserInputResponse] = useState<string | null>(null);
 
   const handleRegenerate = (idx: number) => {
     setSteps((prev) =>
@@ -73,19 +76,62 @@ export default function Workflow({ showLogs }: { showLogs: boolean }) {
     );
   };
 
+  const handleSendCTA = async () => {
+    setUserInputLoading(true);
+    setUserInputResponse(null);
+    try {
+      const res = await fetch('http://localhost:8000/agent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: steps[0].value,
+          user_id: 'test_user_123',
+          session_id: 'session_id_123',
+        }),
+      });
+      const data = await res.json();
+      setUserInputResponse(data.responses?.[0] || 'No response');
+    } catch (e) {
+      setUserInputResponse('Error sending request');
+    } finally {
+      setUserInputLoading(false);
+    }
+  };
+
   return (
     <div className="relative flex w-full max-w-xl mx-auto">
       <div className="flex-1 space-y-6 py-12">
         {steps.map((step, idx) => (
-          <StepCard
-            key={step.title}
-            step={step}
-            expanded={expanded === idx}
-            onToggle={() => setExpanded(expanded === idx ? null : idx)}
-            onRegenerate={() => handleRegenerate(idx)}
-            onChange={(val: string) => handleChange(idx, val)}
-            isLast={idx === steps.length - 1}
-          />
+          <div key={step.title}>
+            <StepCard
+              step={step}
+              expanded={expanded === idx}
+              onToggle={() => setExpanded(expanded === idx ? null : idx)}
+              onRegenerate={() => handleRegenerate(idx)}
+              onChange={(val: string) => handleChange(idx, val)}
+              isLast={idx === steps.length - 1}
+            />
+            {idx === 0 && expanded === 0 && (
+              <div className="mt-4 flex flex-col gap-2">
+                <Button
+                  onClick={handleSendCTA}
+                  disabled={userInputLoading}
+                  className="w-fit"
+                >
+                  {userInputLoading ? (
+                    <span className="flex items-center gap-2"><span className="animate-spin inline-block w-4 h-4 border-2 border-blue-400 border-t-transparent text-gray-800 rounded-full"></span> Sending...</span>
+                  ) : (
+                    'Send CTA'
+                  )}
+                </Button>
+                {userInputResponse && (
+                  <div className="bg-gray-100 border rounded p-3 text-sm text-gray-800 mt-2">
+                    {userInputResponse}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         ))}
       </div>
       <AnimatePresence>

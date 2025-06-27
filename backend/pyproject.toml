@@ -7,7 +7,11 @@ dependencies = [
     "uvicorn",
     "a2a-sdk",
     "dotenv",
-    "google-adk"
+    "google-adk",
+    "fastapi",
+    "pydantic",
+    "requests",
+    "aiohttp"
 ]
 
 [tool.uv]
