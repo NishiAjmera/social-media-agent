@@ -1,0 +1,13 @@
+[project]
+name = "social-media-assistant"
+version = "0.1.0"
+description = "Travel assistant app"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "a2a-sdk",
+    "dotenv",
+    "google-adk"
+]
+
+[tool.uv]
