@@ -77,7 +77,7 @@ export default function StepCard({ step, expanded, onToggle, onRegenerate, onCha
             )}
             <div className="flex gap-2">
               <Button variant="outline" size="sm" onClick={onRegenerate} disabled={step.loading}>
-                Regenerate
+                Generate
               </Button>
               {step.canCopy && !step.loading && (
                 <Button variant="secondary" size="sm" onClick={handleCopy}>
