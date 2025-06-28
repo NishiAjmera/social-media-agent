@@ -7,3 +7,6 @@ Contains 3 simple agents
 3) Optimizer
 
 and an Orchestrator Agent.
+
+
+![Multi Agent Flow](social-media-assistant-fe/public/flow.png)
