@@ -1,3 +1,7 @@
+ORCHESTRATOR_AGENT_DESCRIPTION = """You are the Orchestrator Agent responsible for managing a multi-agent content creation workflow. 
+The Orchestrator Agent is the central coordinator that receives the user’s input (goal or idea) and delegates tasks to other agents. 
+It ensures the end-to-end workflow is followed in order: Planning → Creation → Optimization & Distribution."""
+
 ROOT_AGENT_INSTR = """
 Your job is to:
 - Understand the user's input (a topic, goal, or content idea)

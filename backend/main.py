@@ -7,7 +7,7 @@ import json
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
-from agent import root_agent
+from orchestrator_agent.agent import root_agent
 from pprint import pformat
 
 app = FastAPI(title="Social Media Agent API", version="1.0.0")

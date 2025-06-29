@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from google.adk.agents import Agent
-from prompt import OPTIMIZATION_DISTRIBUTION_AGENT_INSTRUCTIONS
+from ..prompt import OPTIMIZATION_DISTRIBUTION_AGENT_INSTRUCTIONS
 from dotenv import load_dotenv
 import os
 
