@@ -9,7 +9,7 @@ Contains 3 simple agents
 
 and an Orchestrator Agent.
 
-Run the backend application
+# Run the backend application
 
 cd backend
 uv sync
@@ -22,7 +22,7 @@ To run the adk web
 uv run adk web
 
 
-Run the frontend
+# Run the frontend
 
 cd social-media-assistant-fe
 yarn install
