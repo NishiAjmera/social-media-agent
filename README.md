@@ -14,13 +14,16 @@ Run the backend application
 cd backend
 uv sync
 uv run main.py
+
 app will run on port http://localhost:8000
 
 To run the adk web
+
 uv run adk web
 
 
 Run the frontend
+
 cd social-media-assistant-fe
 yarn install
 yarn run dev
