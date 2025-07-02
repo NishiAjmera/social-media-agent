@@ -12,6 +12,9 @@ and an Orchestrator Agent.
 # Run the backend application
 
 cd backend
+
+copy .env.example and add your Google API key
+
 uv sync
 uv run main.py
 
